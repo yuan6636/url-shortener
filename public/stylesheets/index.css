@@ -17,3 +17,14 @@ img {
   color: #bebebe;
   font-weight: bold;
 }
+
+.popover {
+  background-color: #D73116;
+  color: #ffffff;
+  font-size: 14px;
+  --bs-popover-bg: #D73116;
+}
+
+.popover-body {
+  color: white;
+}
