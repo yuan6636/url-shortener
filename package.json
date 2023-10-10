@@ -12,6 +12,7 @@
   "author": "yuan6636",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2"
   }
 }
