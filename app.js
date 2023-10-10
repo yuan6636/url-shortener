@@ -20,13 +20,21 @@ app.get('/', (req, res) => {
 
 app.post('/shorten', (req, res) => {
   const originalUrl = req.body.originalUrl
-  const shortUrl = generateShortUrl ()
+  const existingShortUrl = findExistingShortUrl(originalUrl)
+  
   if(!originalUrl) {
     return res.render('index', { error: 'Please input valid URL!' })
   }
-  urlCollection[shortUrl] = originalUrl    //建立 originalUrl 和 shortUrl 的關聯
-  writeDataToFile(JsonPath, urlCollection)
-  res.render('index', { showShortenedURL: true, shortUrl, BASE_URL })
+  // 判斷是否有相同的短網址
+  if(existingShortUrl) {
+    res.render('index', { showShortenedURL: true, shortUrl: existingShortUrl, BASE_URL })
+  } else {
+    const shortUrl = generateShortUrl()
+    urlCollection[shortUrl] = originalUrl    //建立 originalUrl 和 shortUrl 的關聯
+    writeDataToFile(JsonPath, urlCollection)
+    res.render('index', { showShortenedURL: true, shortUrl, BASE_URL })
+  }
+  
 })
 
 app.get('/:shortUrl', (req, res) => {
@@ -69,4 +77,10 @@ function readDataFromFile(filePath) {
 // 將網址存入 url.json
 function writeDataToFile(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data))
+}
+
+function findExistingShortUrl(originalUrl) {
+  // 使用 Object.keys() 遍歷 urlCollection，判斷能否找到相同的 originalUrl 
+  const existingShortUrl = Object.keys(urlCollection).find(shortUrl => urlCollection[shortUrl] === originalUrl);
+  return existingShortUrl || null;
 }
