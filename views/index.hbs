@@ -1,12 +1,29 @@
 <div class="m-0 d-flex flex-column align-items-center">
   <h1>URL Shortner</h1>
   <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png" alt="">
-  <form class="col-5">
-    <div class="mb-3 mt-5">
-      <input type="text" class="form-control" placeholder="Input URL here">
+  {{#if showShortenedURL}}
+  <div class="mt-5 text-center" id="short-link">
+    <h2>Success! Please use this link:</h2>
+    <a id="short-url" class="fs-3" href={{shortUrl}}>{{BASE_URL}}{{shortUrl}}</a>
+    <div class="mt-3">
+      <button id="copy-button" type="button" class="btn btn-primary col-3">Copy</button>
+      <a class="btn btn-secondary" href="/" role="button">back</a>
+    </div>
+  </div>
+  {{else}}
+  <form class="col-5" action="/shorten" method="POST">
+    <div id="submit-url" class="mb-3 mt-5">
+      {{#if error}}
+      <div class="alert-message text-danger mb-2">
+        {{error}}
+      </div>
+      {{/if}}
+      <label for="originalUrl" class="d-none">初始網址:</label>
+      <input type="text" class="form-control" placeholder="Input URL here" name="originalUrl" id="originalUrl">
     </div>
     <div class="shorten mt-3 text-center">
       <button type="submit" class="btn btn-outline-primary mx-auto" style="width: 250px">Shorten</button>
     </div>
   </form>
+  {{/if}}
 </div>
