@@ -48,8 +48,8 @@ express server on http://localhost:3000
 
 ## 專案畫面
 
-![首頁](public\img\Reading.png)
-![短網址](public\img\shortening.png)
+![首頁](https://github.com/yuan6636/url-shortener/blob/main/public/img/Reading.png)
+![短網址](https://github.com/yuan6636/url-shortener/blob/main/public/img/shortening.png)
 
 ## 使用的工具
 
