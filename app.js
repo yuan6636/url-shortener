@@ -27,12 +27,12 @@ app.post('/shorten', (req, res) => {
   }
   // 判斷是否有相同的短網址
   if(existingShortUrl) {
-    res.render('index', { showShortenedURL: true, shortUrl: existingShortUrl, BASE_URL })
+    res.render('index', { showShortenedURL: true, shortUrl: existingShortUrl, BASE_URL, originalUrl })
   } else {
     const shortUrl = generateShortUrl()
     urlCollection[shortUrl] = originalUrl    //建立 originalUrl 和 shortUrl 的關聯
     writeDataToFile(JsonPath, urlCollection)
-    res.render('index', { showShortenedURL: true, shortUrl, BASE_URL })
+    res.render('index', { showShortenedURL: true, shortUrl, BASE_URL, originalUrl })
   }
   
 })
